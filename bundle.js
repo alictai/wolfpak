@@ -20,10 +20,10 @@ var fill = d3.scale.ordinal()
     .domain(d3.range(4))
     .range(["#000000", "#FFDD89", "#957244", "#F26223"]);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".viz").append("svg")
     .attr("width", width)
     .attr("height", height)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 svg.append("g").selectAll("path")

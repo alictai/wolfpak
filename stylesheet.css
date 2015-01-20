@@ -1,0 +1,25 @@
+body {
+  font: 10px sans-serif;
+}
+
+h1 {
+	padding:0px;
+	margin:0px;
+}
+
+.chord path {
+  fill-opacity: .67;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+.filters {
+	float: left;
+	width: 20vw;
+	padding:10px;
+}
+
+.viz {
+	float: right;
+	width: 80vw;
+}
