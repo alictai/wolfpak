@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font: 10px sans-serif;
-}
-
-.chord path {
-  fill-opacity: .67;
-  stroke: #000;
-  stroke-width: .5px;
-}
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-
 // From http://mkweb.bcgsc.ca/circos/guide/tables/
 var matrix = [
   [11975,  5871, 8916, 2868],
@@ -107,5 +88,3 @@ function fade(opacity) {
         .style("opacity", opacity);
   };
 }
-
-</script>
