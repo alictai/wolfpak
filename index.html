@@ -3,17 +3,32 @@
 
 <head>
 	<meta charset="utf-8">
+	<title>Flow Kap</title>
+
+	<!-- Javascript Libraries -->
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<title>Flow Pak</title>
+	<script src="http://code.jquery.com/jquery-git2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+
+	<!-- Styling Links -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" media="all" href="stylesheet.css"/>
 </head>
-<body>
-	<div class="filters">
-		<h1>FlowPak</h1>
-	</div>
-	<div class="viz">
 
+<body>
+	<!-- Header and Filters -->
+	<div class="filters">
+		<h1>flow kap</h1>
+		</br>
+		<input id="deptsearch">
+		<p> IE 8 or earlier are not supported </p>
 	</div>
+
+	<!-- Visualization -->
+	<div class="viz">
+	</div>
+
+	<!-- Visualization JS (in body as it edits DOM elements) -->
 	<script src="bundle.js"></script>
 </body>
 
