@@ -35,7 +35,7 @@ svg.append("g").selectAll("path")
     .on("mouseover", fade(.1))
     .on("mouseout", fade(1));
 
-var ticks = svg.append("g").selectAll("g")
+/*var ticks = svg.append("g").selectAll("g")
     .data(chord.groups)
   .enter().append("g").selectAll("g")
     .data(groupTicks)
@@ -77,7 +77,7 @@ function groupTicks(d) {
       label: i % 5 ? null : v / 1000 + "k"
     };
   });
-}
+}*/
 
 // Returns an event handler for fading a given chord group.
 function fade(opacity) {
