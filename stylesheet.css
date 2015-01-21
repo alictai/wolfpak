@@ -7,6 +7,14 @@ h1 {
 	margin:0px;
 }
 
+h3 {
+	font-weight:300;
+}
+
+input {
+	font-family: 'Raleway', sans-serif;
+}
+
 .chord path {
   fill-opacity: .67;
   stroke: #000;
@@ -15,14 +23,28 @@ h1 {
 
 .filters {
 	float: left;
-	width: 20vw;
-	padding:10px;
+	width: 25vw;
+	height: 85vh;
+	padding-left:10px;
+	padding-top:10px;
+	color:#848484;
+	font-weight:300;
+	/*border: 2px solid;*/
 }
 
 .viz {
 	float: right;
-	width:75vw;
-	padding:10px;
+	width: 70vw;
+	height: 85vh;
+	padding-top: 30px;
+	/*border: 2px solid;*/
+}
+
+.footer {
+	/*padding:10px;*/
+	/*border: 2px solid;*/
+	color:#808080;
+	text-align:right;
 }
 
 #deptsearch {
