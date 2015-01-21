@@ -10,9 +10,11 @@
 	<script src="http://code.jquery.com/jquery-git2.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="parser.js"></script>
+	<script type="text/javascript" src="ui.js"></script>
 
 	<!-- Styling Links -->
 	<!-- <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" media="all" href="stylesheet.css"/>
 </head>
@@ -26,7 +28,10 @@
 			<li> Append the department filters hurr </li>
 		</ul>
 		<h3>Add Departments</h3>
-		<input id="deptsearch">
+		<div class="ui-widget">
+			<!-- <label for="deptsearch">Add Departments: </label> -->
+			<input id="deptsearch">
+		</div>
 		<h3>Additional Filters +</h3>
 	</div>
 
