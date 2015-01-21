@@ -18,7 +18,8 @@ var width = 960,
 
 var fill = d3.scale.ordinal()
     .domain(d3.range(4))
-    .range(["#000000", "#FFDD89", "#957244", "#F26223"]);
+    .range(["#5E412F", "#FCEBB6", "#78C0A8", "#F26223"]);
+    //.range(["#EC95ED", "#95D2ED", "#EDE895", "#A8ED95"]);
 
 var svg = d3.select(".viz").append("svg")
     .attr("width", width)
