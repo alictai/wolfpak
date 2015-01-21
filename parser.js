@@ -1,6 +1,10 @@
 var parse_courses = function()
 {
-	if (window.XMLHttpRequest)
+
+    // This will need to happen when we move on to use
+    // a real hosted csv file.
+
+	/*if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
     }
@@ -17,7 +21,8 @@ var parse_courses = function()
     }
     xmlhttp.open("GET", "CourseLocations.csv", false );
     xmlhttp.send();  
-
-	return d3.csv.parse(xmlhttp.responseText);
+    */
+    
+	return d3.csv.parse(courseLocations);
 
 }
