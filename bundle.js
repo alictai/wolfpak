@@ -6,56 +6,65 @@
   [ 1013,   990,  940, 6907]
 ];*/
 
-var chord = d3.layout.chord()
+
+
+function begin_viz()
+{
+  console.log("TESTING");
+
+  var chord = d3.layout.chord()
     .padding(.05)
     .sortSubgroups(d3.descending)
     .matrix(matrix);
 
-var width = 960,
-    height = 500,
-    innerRadius = Math.min(width, height) * .41,
-    outerRadius = innerRadius * 1.1;
+  var width = 960,
+      height = 500,
+      innerRadius = Math.min(width, height) * .41,
+      outerRadius = innerRadius * 1.1;
 
-var fill = d3.scale.ordinal()
-    .domain(d3.range(4))
-    .range(["#5E412F", "#FCEBB6", "#78C0A8", "#F26223"]);
-    //.range(["#EC95ED", "#95D2ED", "#EDE895", "#A8ED95"]);
+  var fill = d3.scale.ordinal()
+      .domain(d3.range(4))
+      .range(["#5E412F", "#FCEBB6", "#78C0A8", "#F26223"]);
+      //.range(["#EC95ED", "#95D2ED", "#EDE895", "#A8ED95"]);
 
-var svg = d3.select(".viz").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  var svg = d3.select(".viz").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-var tooltip = d3.select("body")
-    .append("div")
-    .style("background-color", "#E0FFE0")
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .text("a simple tooltip");
+  var tooltip = d3.select("body")
+      .append("div")
+      .style("background-color", "#E0FFE0")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .text("a simple tooltip");
 
-svg.append("g").selectAll("path")
-    .data(chord.groups)
-  .enter().append("path")
-    .style("fill", function(d) { return fill(d.index); })
-    .style("stroke", function(d) { return fill(d.index); })
-    .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
-    .on("mouseover", function()
-        {
-          tooltip.text("another tooltip"); 
-          return tooltip.style("visibility", "visible");
-        })
-    .on("mousemove", function()
-        {
-          return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
-        })
-    .on("mouseout", function()
-        {
-          return tooltip.style("visibility", "hidden");
-        });
-    //.on("mouseover", fade(.1))
-    //.on("mouseout", fade(1));
+  svg.append("g").selectAll("path")
+      .data(chord.groups)
+    .enter().append("path")
+      .style("fill", function(d) { return fill(d.index); })
+      .style("stroke", function(d) { return fill(d.index); })
+      .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
+      .on("mouseover", function()
+          {
+            tooltip.text("another tooltip"); 
+            return tooltip.style("visibility", "visible");
+          })
+      .on("mousemove", function()
+          {
+            // d3.event.pageY/pageX are the y and x coordinates of the mouse.
+            return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+          })
+      .on("mouseout", function()
+          {
+            return tooltip.style("visibility", "hidden");
+          });
+      //.on("mouseover", fade(.1))
+      //.on("mouseout", fade(1));
+
+}
 
 /*var ticks = svg.append("g").selectAll("g")
     .data(chord.groups)

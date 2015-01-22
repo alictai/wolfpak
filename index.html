@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="CourseLocationCSV.js"></script>
 	<script type="text/javascript" src="parser.js"></script>
 	<script type="text/javascript" src="ui.js"></script>
+	<script type="text/javascript" src="bundle.js"></script>	
 
 	<!-- Styling Links -->
 	<!-- <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> -->
@@ -53,9 +54,9 @@
 		var buildings = split_buildings(courses);
 		var matrix = create_matrix(buildings);
 		console.log(matrix);
+		begin_viz();
 	</script>
-	<script src="bundle.js"></script>
-
+	
 </body>
 
 </html>
