@@ -44,7 +44,10 @@
 	<!-- Visualization JS (in body as it edits DOM elements) -->
 	<script src="bundle.js"></script>
 	<script type="text/javascript">
-		console.log(parse_courses());
+		var courses = parse_courses();
+		console.log("courses:", courses);
+		var buildings = split_buildings(courses);
+
 	</script>
 
 </body>
