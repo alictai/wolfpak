@@ -47,12 +47,14 @@
 	</div>
 
 	<!-- Visualization JS (in body as it edits DOM elements) -->
-	<script src="bundle.js"></script>
 	<script type="text/javascript">
 		var courses = parse_courses();
 		console.log("courses:", courses);
 		var buildings = split_buildings(courses);
+		var matrix = create_matrix(buildings);
+		console.log(matrix);
 	</script>
+	<script src="bundle.js"></script>
 
 </body>
 

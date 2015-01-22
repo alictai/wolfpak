@@ -44,13 +44,13 @@ function split_buildings(courses)
             var index = contains_building(buildings, element.Location);
             // -1 means that buildings isn't in the array yet.
             if (index == -1){
-                buildings.push({"Building": element.Location, "Enrolled" : element.Enrolled});
+                buildings.push({"Building": element.Location, "Enrolled" : parseInt(element.Enrolled)});
             } else {
-                buildings[index].Enrolled += element.Enrolled;
+                buildings[index].Enrolled += parseInt(element.Enrolled);
             }
         });
 
-    console.log(buildings);
+    return buildings;
 }
 
 function contains_building(buildings, location)
@@ -59,10 +59,27 @@ function contains_building(buildings, location)
 
     buildings.forEach(function(element, index, array)
         {
-            if(element.Location == location){
+            if(element.Building == location){
                 building_index = index;
             }
         });
 
     return building_index;
+}
+
+function create_matrix(buildings){
+    var building_matrix = [];
+    var building_length = buildings.length;
+
+    buildings.forEach(function(element, index, array)
+        {
+            row_array = [];
+            row_array.push(parseInt(element.Enrolled));
+            for(i = 1; i < building_length; i++){
+                row_array.push(0);
+            }
+            building_matrix.push(row_array);
+        });
+
+    return building_matrix;
 }
