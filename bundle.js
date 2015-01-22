@@ -25,7 +25,7 @@ var svg = d3.select(".viz").append("svg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform", "translate(" + width / 4 + "," + height / 2 + ")");
 
 svg.append("g").selectAll("path")
     .data(chord.groups)
