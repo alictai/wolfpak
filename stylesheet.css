@@ -1,14 +1,16 @@
 body {
-  font-family: 'Raleway', sans-serif;
+  	font-family: 'Raleway', sans-serif;
+  	padding: 0px;
+	margin: 0px;
 }
 
 h1 {
-	padding:0px;
-	margin:0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 h3 {
-	font-weight:300;
+	font-weight: 300;
 }
 
 input {
@@ -23,31 +25,38 @@ input {
 
 .filters {
 	float: left;
-	width: 25vw;
+	width: 24vw - 10px;
 	height: 85vh;
-	padding-left:10px;
-	padding-top:10px;
-	color:#848484;
-	font-weight:300;
-	/*border: 2px solid;*/
+	padding: 0px;
+	padding-left: 10px;
+	padding-top: 10px;
+	color: #848484;
+	font-weight: 300;
+	/*border: 2px solid blue;*/
+	margin: 0px;
 }
 
 .viz {
 	float: right;
-	width: 70vw;
+	width: 74vw;
 	height: 85vh;
 	padding-top: 30px;
-	/*border: 2px solid;*/
+	/*border: 2px solid green;*/
+	margin: 0px;
+	padding: 0px;
 }
 
 .footer {
-	/*padding:10px;*/
-	/*border: 2px solid;*/
-	color:#808080;
-	text-align:right;
+	padding: 10px;
+	margin: 0px;
+	/*border: 2px solid red;*/
+	color: #808080;
+	text-align: right;
+	width: 100vw;
+	float: right;
 }
 
 #deptsearch {
-	width: 100%;
+	width: 90%;
 	height: 20px;
 }
