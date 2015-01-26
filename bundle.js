@@ -10,12 +10,21 @@
 
 function begin_viz()
 {
-  console.log("TESTING");
+  var matrix = [];
+
+  compounded_buildings.forEach(function(element, index, array)
+    {
+      matrix.push(element.Matrix);
+    });
 
   var chord = d3.layout.chord()
     .padding(.05)
     .sortSubgroups(d3.descending)
     .matrix(matrix);
+
+  //chord.groups.Buildings = compounded_buildings;
+
+  console.log(chord);
 
   var width = 960,
       height = 500,
@@ -33,7 +42,15 @@ function begin_viz()
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  var tooltip = d3.select("body")
+  var tooltip1 = d3.select("body")
+      .append("div")
+      .style("background-color", "#E0FFE0")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .text("a simple tooltip");
+
+  var tooltip2 = d3.select("body")
       .append("div")
       .style("background-color", "#E0FFE0")
       .style("position", "absolute")
@@ -47,19 +64,23 @@ function begin_viz()
       .style("fill", function(d) { return fill(d.index); })
       .style("stroke", function(d) { return fill(d.index); })
       .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
-      .on("mouseover", function()
+      .on("mouseover", function(d)
           {
-            tooltip.text("another tooltip"); 
-            return tooltip.style("visibility", "visible");
+            tooltip1.text("Name: " + compounded_buildings[d.index].Name); 
+            tooltip2.text("Enrolled: " + compounded_buildings[d.index].Enrolled); 
+            tooltip2.style("visibility", "visible");
+            return tooltip1.style("visibility", "visible");
           })
       .on("mousemove", function()
           {
             // d3.event.pageY/pageX are the y and x coordinates of the mouse.
-            return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+            tooltip2.style("top", (d3.event.pageY + 10)+"px").style("left",(d3.event.pageX+10)+"px");
+            return tooltip1.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
           })
       .on("mouseout", function()
           {
-            return tooltip.style("visibility", "hidden");
+            tooltip2.style("visibility", "hidden");
+            return tooltip1.style("visibility", "hidden");
           });
       //.on("mouseover", fade(.1))
       //.on("mouseout", fade(1));

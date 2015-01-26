@@ -42,11 +42,12 @@ function split_buildings(courses)
     courses.forEach(function(element, index, array)
         {
             var index = contains_building(buildings, element.Location);
+            Num = parseInt(element.Enrolled);
             // -1 means that buildings isn't in the array yet.
             if (index == -1){
-                buildings.push({"Building": element.Location, "Enrolled" : parseInt(element.Enrolled)});
+                buildings.push({"Building": element.Location, "Enrolled" : Num});
             } else {
-                buildings[index].Enrolled += parseInt(element.Enrolled);
+                buildings[index].Enrolled += Num;
             }
         });
 
@@ -78,7 +79,10 @@ function create_matrix(buildings){
             for(i = 1; i < building_length; i++){
                 row_array.push(0);
             }
-            building_matrix.push(row_array);
+
+            compounded = {"Matrix" : row_array, "Name" : element.Building, "Enrolled" : element.Enrolled};
+
+            building_matrix.push(compounded);
         });
 
     return building_matrix;
