@@ -58,7 +58,13 @@ $(function() {
     "Visual and Critical Studies",
     "Women's, Gender, and Sexuality Studies"
    ];
+
    $( "#deptsearch" ).autocomplete({
      source: departments
+   });
+
+   $("#deptButton").button().click(function(event) {
+        split_buildings(courses, $("#deptsearch").val());  
+        $("#deptsearch").val("");
    });
 });

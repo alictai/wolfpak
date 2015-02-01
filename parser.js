@@ -28,6 +28,7 @@ function parse_courses()
     parsed_data.forEach(function(element, index, array)
         {
             // Extract just the building code without room number.
+            element.Dept = element.Course.split(" ")[0];
             element.Location = element.Location.split(" ")[0];
         });
 
@@ -36,22 +37,25 @@ function parse_courses()
 
 // Will also need to take an input of selected departments eventually.
 // For now, just assume all of them are selected.
-function split_buildings(courses)
+function split_buildings(courses, dept)
 {
     var buildings = [];
     courses.forEach(function(element, index, array)
         {
-            var index = contains_building(buildings, element.Location);
-            Num = parseInt(element.Enrolled);
-            // -1 means that buildings isn't in the array yet.
-            if (index == -1){
-                buildings.push({"Building": element.Location, "Enrolled" : Num});
-            } else {
-                buildings[index].Enrolled += Num;
+            if (dept == "" || dept == element.Dept){
+                var index = contains_building(buildings, element.Location);
+                Num = parseInt(element.Enrolled);
+                // -1 means that buildings isn't in the array yet.
+                if (index == -1){
+                    buildings.push({"Building": element.Location, "Enrolled" : Num});
+                } else {
+                    buildings[index].Enrolled += Num;
+                }
             }
         });
 
-    return buildings;
+    compounded_buildings = create_matrix(buildings);
+    begin_viz();
 }
 
 function contains_building(buildings, location)

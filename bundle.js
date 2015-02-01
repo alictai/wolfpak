@@ -10,6 +10,8 @@
 
 function begin_viz()
 {
+  $("svg").remove();
+
   var matrix = [];
 
   compounded_buildings.forEach(function(element, index, array)

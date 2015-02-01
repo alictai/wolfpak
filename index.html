@@ -9,9 +9,9 @@
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://code.jquery.com/jquery-git2.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="ui.js"></script>
 	<script type="text/javascript" src="CourseLocationCSV.js"></script>
 	<script type="text/javascript" src="parser.js"></script>
-	<script type="text/javascript" src="ui.js"></script>
 	<script type="text/javascript" src="bundle.js"></script>	
 
 	<!-- Styling Links -->
@@ -33,6 +33,7 @@
 		<div class="ui-widget">
 			<!-- <label for="deptsearch">Add Departments: </label> -->
 			<input id="deptsearch">
+			<button id="deptButton"> Update </button>
 		</div>
 		<h3>Additional Filters +</h3>
 	</div>
@@ -51,10 +52,8 @@
 	<script type="text/javascript">
 		var courses = parse_courses();
 		console.log("courses:", courses);
-		var buildings = split_buildings(courses);
-		var compounded_buildings = create_matrix(buildings);
-		console.log(compounded_buildings);
-		begin_viz();
+		split_buildings(courses, "");
+		
 	</script>
 	
 </body>
