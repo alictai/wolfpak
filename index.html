@@ -33,6 +33,7 @@
 		<div class="ui-widget">
 			<!-- <label for="deptsearch">Add Departments: </label> -->
 			<input id="deptsearch">
+			<!-- This button updates the visualization by filtering the given department -->
 			<button id="deptButton"> Update </button>
 		</div>
 		<h3>Additional Filters +</h3>
@@ -50,8 +51,12 @@
 
 	<!-- Visualization JS (in body as it edits DOM elements) -->
 	<script type="text/javascript">
+		// parse_courses return an array of objects from the Courses csv file.
 		var courses = parse_courses();
 		console.log("courses:", courses);
+
+		// split buildings will take in an array of course objects and a string.
+		// The string is a filter for which department courses should be visualized.
 		split_buildings(courses, "");
 		
 	</script>
