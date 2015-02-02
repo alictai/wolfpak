@@ -95,8 +95,11 @@ function begin_viz()
             // erase the tooltips when mouse moves out of the arc.
             tooltip2.style("visibility", "hidden");
             return tooltip1.style("visibility", "hidden");
+          })
+      .on("click", function()
+          {
+            $("#overlay_div").css("visibility", "visible");
           });
-      //.on("mouseover", fade(.1))
       //.on("mouseout", fade(1));
 
 

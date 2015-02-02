@@ -36,6 +36,17 @@ input {
 	margin: 0px;
 }
 
+.Overlay {
+	position: absolute;
+	width: 80%;
+	height: 80%;
+	border: solid;
+	background-color: white;
+	left: 10%;
+	top: 10%;
+	visibility: hidden;
+}
+
 .viz {
 	float: right;
 	width: 74vw;
