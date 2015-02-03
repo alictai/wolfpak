@@ -64,12 +64,12 @@ function split_buildings(courses, dept)
     // Aggregate all courses into buildings by adding Enrolled students.
     courses.forEach(function(element, index, array)
         {
-            if (dept == "" || dept == element.Dept){
-                var index = contains_building(buildings, element.Location);
+            if (dept == "" || dept == element.Department){
+                var index = contains_building(buildings, element.BuildingName);
                 Num = parseInt(element.Enrolled);
                 // -1 means that buildings isn't in the array yet.
                 if (index == -1){
-                    buildings.push({"Building": element.Location, "Enrolled" : Num});
+                    buildings.push({"Building": element.BuildingName, "Enrolled" : Num});
                 } else {
                     buildings[index].Enrolled += Num;
                 }
