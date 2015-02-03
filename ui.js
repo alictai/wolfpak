@@ -67,4 +67,8 @@ $(function() {
         split_buildings(courses, $("#deptsearch").val());  
         $("#deptsearch").val("");
    });
+
+   $( window ).resize(function() {
+        heatmap();
+    });
 });

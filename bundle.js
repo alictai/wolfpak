@@ -99,6 +99,7 @@ function begin_viz()
       .on("click", function()
           {
             $("#overlay_div").css("visibility", "visible");
+            heatmap();
           });
       //.on("mouseout", fade(1));
 
