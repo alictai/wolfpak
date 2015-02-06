@@ -1,7 +1,13 @@
+/*
+    CourseLocationCSV.js is our lazy implementation for not having to host the website for testing.
+    To avoid having to deal with cross domain issues when accessing our csv files, we just dumped
+    our CSVs as strings. 
+    THIS IS ONLY FOR TESTING. WE WILL BE READING FROM AN ACTUAL CSV WHEN GOING LIVE.
+*/
+
 // I can't believe this worked. 
 // JS doesn't allow multi line strings. Had to find a weird trick here: http://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
 // Scroll down to see reply from Jordao.
-
 function hereDoc(f) {
 	return f.toString().
 		replace(/^[^\/]+\/\*!?/, '').

@@ -23,34 +23,36 @@
 </head>
 
 <body>
-	<!-- Header and Filters -->
-	<div class="filters">
-		<h1><span style="color:#78C0A8">flow</span><span style="color:#F26223">kap</span></h1>
-		<h3>Departments</h3>
-		<ul>
-			<li> Append the department filters hurr </li>
-		</ul>
-		<h3>Add Departments</h3>
-		<div class="ui-widget">
-			<!-- <label for="deptsearch">Add Departments: </label> -->
-			<input id="deptsearch">
-			<!-- This button updates the visualization by filtering the given department -->
-			<button id="deptButton"> Update </button>
+	<div id = "background">
+		<!-- Header and Filters -->
+		<div class="filters">
+			<h1><span style="color:#78C0A8">flow</span><span style="color:#F26223">kap</span></h1>
+			<h3>Departments</h3>
+			<ul>
+				<li> Append the department filters hurr </li>
+			</ul>
+			<h3>Add Departments</h3>
+			<div class="ui-widget">
+				<!-- <label for="deptsearch">Add Departments: </label> -->
+				<input id="deptsearch">
+				<!-- This button updates the visualization by filtering the given department -->
+				<button id="deptButton"> Update </button>
+			</div>
+			<h3>Additional Filters +</h3>
 		</div>
-		<h3>Additional Filters +</h3>
-	</div>
 
-	<!-- Visualization -->
-	<div class="viz">
+		<!-- Visualization -->
+		<div class="viz">
+		</div>
+
+		<!-- Footer -->
+		<div class="footer">
+			<p>Map <span style="color:#78C0A8">flow.</span></br>
+			<span style="color:#F26223">Cap</span> commute time.</p>
+		</div>
 	</div>
 
 	<div class="Overlay" id="overlay_div">
-	</div>
-
-	<!-- Footer -->
-	<div class="footer">
-		<p>Map <span style="color:#78C0A8">flow.</span></br>
-		<span style="color:#F26223">Cap</span> commute time.</p>
 	</div>
 
 	<!-- Visualization JS (in body as it edits DOM elements) -->

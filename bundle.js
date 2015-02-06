@@ -98,8 +98,12 @@ function begin_viz()
           })
       .on("click", function()
           {
+            // Make the window visible.
             $("#overlay_div").css("visibility", "visible");
+            // Draw the actual heatmap
             heatmap();
+            // This timeout is needed since we don't want a race condition of click callback functions...
+            setTimeout(function(){ overlay_showing = true}, 500);
           });
       //.on("mouseout", fade(1));
 

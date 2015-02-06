@@ -76,6 +76,13 @@ function split_buildings(courses, dept)
             }
         });
 
+    // Remove buildings with only 1 student in them. This can result from those 
+    // independent study courses.
+    buildings = buildings.filter(function(element)
+                {
+                    return element.Enrolled > 1;
+                });
+
     compounded_buildings = create_matrix(buildings);
     begin_viz();
 }
