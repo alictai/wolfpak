@@ -61,10 +61,14 @@ Notes:          Filters through the courses for the chosen department. Creates a
 function split_buildings(courses, dept)
 {
     var buildings = [];
+    selected_courses = [];
     // Aggregate all courses into buildings by adding Enrolled students.
     courses.forEach(function(element, index, array)
         {
             if (dept == "" || dept == element.Department){
+
+                selected_courses.push(element);
+
                 var index = contains_building(buildings, element.BuildingName);
                 Num = parseInt(element.Enrolled);
                 // -1 means that buildings isn't in the array yet.

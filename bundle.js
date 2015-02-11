@@ -96,14 +96,14 @@ function begin_viz()
             tooltip2.style("visibility", "hidden");
             return tooltip1.style("visibility", "hidden");
           })
-      .on("click", function()
+      .on("click", function(d)
           {
             // Make the window visible.
             $("#overlay_div").css("visibility", "visible");
             // Draw the actual heatmap
-            heatmap();
-            // This timeout is needed since we don't want a race condition of click callback functions...
-            setTimeout(function(){ overlay_showing = true}, 500);
+            heatmap(compounded_buildings[d.index].Name);
+            // Make heatmap div appear
+            setTimeout(function(){overlay_showing = true}, 500);
           });
       //.on("mouseout", fade(1));
 
