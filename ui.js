@@ -77,6 +77,7 @@ $(function() {
     $("#deptButton").button().click(function(event) {
         split_buildings(courses, $("#deptsearch").val());  
         $("#deptsearch").val("");
+        update_department_list();
     });
 
     // Upon window resizing, I want the heatmap to be redrawn.
@@ -92,4 +93,17 @@ $(function() {
         }
     });
 
+    update_department_list();
+
 });
+
+function update_department_list(){
+
+    $("#department_list").empty();
+
+    if (selected_departments.length > 0){
+        $("#department_list").append('<li>' + selected_departments[0] + '</li>');
+    } else {
+        $("#department_list").append('<li> Showing all departments </li>');
+    }  
+}

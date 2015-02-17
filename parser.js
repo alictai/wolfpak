@@ -3,6 +3,8 @@
     the data.
 */
 
+var selected_departments = [];
+
 /* 
 Output:         Array of course objects from the courses csv file.
 Input:          None.
@@ -62,6 +64,12 @@ function split_buildings(courses, dept)
 {
     var buildings = [];
     selected_courses = [];
+
+    // Nuking the selected departments array for now. Will need to remove later.
+    selected_departments = [];
+    if (dept != ""){
+        selected_departments.push(dept);
+    }
     // Aggregate all courses into buildings by adding Enrolled students.
     courses.forEach(function(element, index, array)
         {
