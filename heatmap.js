@@ -33,30 +33,17 @@ function heatmap(){
   // Parse the csv data (for now). It is just dummy data.
   //var parsed_heatmap = d3.csv.parse(dummyHeatData2);
   //console.log(parsed_heatmap);
-
   //var parsed_heatmap = parseCourseTimes(buildingName, selected_courses);
 
+  // Parse all the course data then filter through to only select the ones happening in this building.
   var parsed_data = d3.csv.parse(courseLocations);
-
   var parsed_heatmap = parseCourseTimes(buildingName, parsed_data);
 
-  var max = 0;
-  for(h = 0; h < parsed_heatmap.length; h++){
-    if (max < parsed_heatmap[h].value){
-      max = parsed_heatmap[h].value;
-    }
-  }
+  // Make the color thresholds dependent on the max value of the current heatmap.
+  ranges = calculateRanges(parsed_heatmap);
 
-  var offset = max / 9;
-  ranges = [];
-
-  for(u = 0; u < 9; u++){
-    ranges.push(offset * u);
-  }
-
-   $("#building_name").text(buildingName);
-
-  console.log(buildingName);
+  // Display name of building on top of heatmap
+  $("#building_name").text(buildingName);
 
   var colorScale = d3.scale.quantile()
         //.domain([0, buckets - 1, d3.max(parsed_heatmap, function (d) { return d.value; })])
@@ -94,14 +81,18 @@ function heatmap(){
   var heatMap = svg.selectAll(".hour")
       .data(parsed_heatmap)
       .enter().append("rect")
-      .attr("x", function(d) { return (parseInt(d.hour)) * gridSizeX; })
-      .attr("y", function(d) { return (parseInt(d.day)) * gridSizeY; })
-      .attr("rx", 4)
-      .attr("ry", 4)
-      .attr("class", "hour bordered")
-      .attr("width", gridSizeX)
-      .attr("height", gridSizeY)
-      .style("fill", colors[0]);
+        .attr("x", function(d) { return (parseInt(d.hour)) * gridSizeX; })
+        .attr("y", function(d) { return (parseInt(d.day)) * gridSizeY; })
+        .attr("rx", 4)
+        .attr("ry", 4)
+        .attr("class", "hour bordered")
+        .attr("width", gridSizeX)
+        .attr("height", gridSizeY)
+        .style("fill", colors[0])
+        .on("click", function(d)
+          {
+            console.log(d);
+          });
 
   heatMap.transition().duration(1000)
       .style("fill", function(d) { return colorScale(d.value); });
@@ -127,6 +118,31 @@ function heatmap(){
     .attr("x", function(d, i) { return legendElementWidth * i; })
     .attr("y", gridSizeY * 6.5);
   
+}
+
+/* 
+Output:         Array of size 9 for the color gradient threshold
+Input:          Array of heatmap data objects
+Side effects:   None.
+Notes:          None.
+*/
+function calculateRanges(heatmap_data){
+  // Make the color thresholds dependent on the max value of the current heatmap.
+  var max = 0;
+  for(h = 0; h < heatmap_data.length; h++){
+    if (max < heatmap_data[h].value){
+      max = heatmap_data[h].value;
+    }
+  }
+
+  var offset = max / 9;
+  ranges = [];
+
+  for(u = 0; u < 9; u++){
+    ranges.push(offset * u);
+  }
+
+  return ranges;
 }
 
 /* 
@@ -176,7 +192,16 @@ function parseCourseTimes(buildingName, selected_courses){
   return numberOfStudentsInBuilding;
 }
 
+/* 
+Output:         true or false, depending on whether days_string contains day.
+Input:          days_string and a current day letter
+Side effects:   None.
+Notes:          None.
+*/
 function HappensOnDay(days_string, day){
+  // The days_string can look like TR if a class happens
+  // on tuesday and thursday. Split it up and check if we 
+  // get a match
   var characters = days_string.split("");
 
   for(k = 0; k < characters.length; k++){
