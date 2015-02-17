@@ -28,7 +28,7 @@ function heatmap(){
       days = ["Mo", "Tu", "We", "Th", "Fr"],
       //times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
       times = ["8:05AM", "9:30AM", "10:30AM", "12:00PM", "1:30PM", "3:00PM", "4:30PM", "6:00PM", "7:30PM", "9:00PM"],
-      ranges = [0, 20, 40, 60, 80, 100, 120, 140, 160]
+      //ranges = [0, 40, 80, 120, 160, 200, 240, 280, 320]
 
   // Parse the csv data (for now). It is just dummy data.
   //var parsed_heatmap = d3.csv.parse(dummyHeatData2);
@@ -39,6 +39,24 @@ function heatmap(){
   var parsed_data = d3.csv.parse(courseLocations);
 
   var parsed_heatmap = parseCourseTimes(buildingName, parsed_data);
+
+
+  // Calculating the ranges for the color treshold based on the max value
+  // in the current heatmap.
+  var max = 0;
+  for(h = 0; h < parsed_heatmap.length; h++){
+    if (max < parsed_heatmap[h].value){
+      max = parsed_heatmap[h].value;
+    }
+  }
+
+  var offset = max / 9;
+  var ranges = [];
+
+  for(u = 0; u < 9; u++){
+    ranges.push(offset * u);
+  }
+
 
   console.log(buildingName);
 
@@ -139,7 +157,7 @@ function parseCourseTimes(buildingName, selected_courses){
 
       selected_courses.forEach(function(element, index, array){
         if(element.BuildingName == buildingName){
-          if (element.Weekdays == days[i]){
+          if (HappensOnDay(element.Weekdays, days[i])) {
             if (element.StartTime == times[j]){
               totalEnrolled += parseInt(element.Enrolled);
             }
@@ -158,4 +176,15 @@ function parseCourseTimes(buildingName, selected_courses){
   }
 
   return numberOfStudentsInBuilding;
+}
+
+function HappensOnDay(days_string, day){
+  var characters = days_string.split("");
+
+  for(k = 0; k < characters.length; k++){
+    if (characters[k] == day){
+      return true;
+    }
+  }
+  return false;
 }
