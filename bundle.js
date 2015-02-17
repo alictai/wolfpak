@@ -101,7 +101,10 @@ function begin_viz()
             // Make the window visible.
             $("#overlay_div").css("visibility", "visible");
             // Draw the actual heatmap
-            heatmap(compounded_buildings[d.index].Name);
+
+            buildingName = compounded_buildings[d.index].Name
+
+            heatmap();
             // Make heatmap div appear
             setTimeout(function(){overlay_showing = true}, 500);
           });

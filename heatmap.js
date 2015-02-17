@@ -2,13 +2,15 @@
     heatmap.js is the module for the heatmap visualization.
 */
 
+var buildingName;
+
 /* 
 Output:         None
 Input:          Name of building that was just clicked -- BUG: ON RESIZE NAME ISNT PASSED IN. MUST THINK OF WAY TO PRESERVE NAME OF BUILDING UPON RESIZE.
 Side effects:   Creates the heatmap by attaching it to the overlay_div.
 Notes:          None.
 */
-function heatmap(buildingName){
+function heatmap(){
 
   // Remove any old heatmaps.
   $("#heatmap").remove();
@@ -32,7 +34,11 @@ function heatmap(buildingName){
   //var parsed_heatmap = d3.csv.parse(dummyHeatData2);
   //console.log(parsed_heatmap);
 
-  var parsed_heatmap = parseCourseTimes(buildingName, selected_courses);
+  //var parsed_heatmap = parseCourseTimes(buildingName, selected_courses);
+
+  var parsed_data = d3.csv.parse(courseLocations);
+
+  var parsed_heatmap = parseCourseTimes(buildingName, parsed_data);
 
   console.log(buildingName);
 
