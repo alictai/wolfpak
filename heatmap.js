@@ -28,7 +28,7 @@ function heatmap(){
       days = ["Mo", "Tu", "We", "Th", "Fr"],
       //times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
       times = ["8:05AM", "9:30AM", "10:30AM", "12:00PM", "1:30PM", "3:00PM", "4:30PM", "6:00PM", "7:30PM", "9:00PM"],
-      //ranges = [0, 40, 80, 120, 160, 200, 240, 280, 320]
+      ranges = [0, 40, 80, 120, 160, 200, 240, 280, 320]
 
   // Parse the csv data (for now). It is just dummy data.
   //var parsed_heatmap = d3.csv.parse(dummyHeatData2);
@@ -40,9 +40,6 @@ function heatmap(){
 
   var parsed_heatmap = parseCourseTimes(buildingName, parsed_data);
 
-
-  // Calculating the ranges for the color treshold based on the max value
-  // in the current heatmap.
   var max = 0;
   for(h = 0; h < parsed_heatmap.length; h++){
     if (max < parsed_heatmap[h].value){
@@ -51,12 +48,13 @@ function heatmap(){
   }
 
   var offset = max / 9;
-  var ranges = [];
+  ranges = [];
 
   for(u = 0; u < 9; u++){
     ranges.push(offset * u);
   }
 
+   $("#building_name").text(buildingName);
 
   console.log(buildingName);
 
