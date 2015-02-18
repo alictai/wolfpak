@@ -41,11 +41,11 @@ function begin_viz()
 
   // Append the svg object to contain the visualization
   var svg = d3.select(".viz").append("svg")
-      .attr("width", width)
+      .attr("width", width )
       .attr("height", height)
       .style("position", "absolute")
       .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        .attr("transform", "translate(" + width / 3 + "," + height / 2 + ")");
 
   // tooltip that will pop up on mouse hovering. Need 2 to make 2 separate line tooltip... Kinda stupid.
   var tooltip1 = d3.select("body")

@@ -11,8 +11,6 @@ Side effects:   Creates the heatmap by attaching it to the overlay_div.
 Notes:          None.
 */
 function heatmap(){
-
-
   // Remove any old heatmaps.
   $("#heatmap").remove();
 
@@ -39,6 +37,7 @@ function heatmap(){
   // Parse all the course data then filter through to only select the ones happening in this building.
   var parsed_data = d3.csv.parse(courseLocations);
   var parsed_heatmap = parseCourseTimes(buildingName, parsed_data);
+  var pie_data = parseDepartments(buildingName, parsed_data);
 
   // Make the color thresholds dependent on the max value of the current heatmap.
   ranges = calculateRanges(parsed_heatmap);
@@ -125,7 +124,7 @@ function heatmap(){
     .attr("x", function(d, i) { return legendElementWidth * i; })
     .attr("y", gridSizeY * 6.5);
 
-  pieChart();
+  pieChart(pie_data);
 }
 
 /* 
@@ -151,6 +150,54 @@ function calculateRanges(heatmap_data){
   }
 
   return ranges;
+}
+
+/* 
+Output:         Array of Department names and number of enrolled students from that department in this building
+Input:          Name of building and selected courses
+Side effects:   None.
+Notes:          None.
+*/
+function parseDepartments(buildingName, courses){
+
+  var coursesInBuilding = [];
+  var pieChartData = [];
+
+  for(var i = 0; i < courses.length; i++){
+    if (courses[i].BuildingName == buildingName){
+      coursesInBuilding.push(courses[i]);
+    }
+  }
+
+  for(var i = 0; i < coursesInBuilding.length; i++){
+    var index = -1;
+    index = ContainsDepartment(pieChartData, coursesInBuilding[i].Department);
+
+    if (index == -1){
+      var newCourse = {Department: coursesInBuilding[i].Department, Enrolled: parseInt(coursesInBuilding[i].Enrolled)};
+      pieChartData.push(newCourse);
+    } else {
+      pieChartData[index].Enrolled += parseInt(coursesInBuilding[i].Enrolled);
+    }
+
+  }
+
+  return pieChartData;
+}
+
+/* 
+Output:         Index of the department, if already in array. -1 otherwise
+Input:          Array of department/enrolled in this building and a department name.
+Side effects:   None.
+Notes:          None.
+*/
+function ContainsDepartment(chartData, dept){
+  for(var i = 0; i < chartData.length; i++){
+    if (chartData[i].Department == dept){
+      return i;
+    }
+  }
+  return -1;
 }
 
 /* 
