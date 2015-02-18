@@ -96,7 +96,13 @@ function heatmap(){
           });
 
   heatMap.transition().duration(1000)
-      .style("fill", function(d) { return colorScale(d.value); });
+      .style("fill", function(d) { 
+                          if (d.value == 0){
+                            return "#AEB2B7";
+                          } else {
+                            return colorScale(d.value);
+                          }
+                        });
 
   heatMap.append("title").text(function(d) { return d.value; });
       
