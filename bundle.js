@@ -43,6 +43,7 @@ function begin_viz()
   var svg = d3.select(".viz").append("svg")
       .attr("width", width)
       .attr("height", height)
+      .style("position", "absolute")
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 

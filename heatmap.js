@@ -12,12 +12,13 @@ Notes:          None.
 */
 function heatmap(){
 
+
   // Remove any old heatmaps.
   $("#heatmap").remove();
 
   // Initializing various variables.
-  var margin = { top: ($("#overlay_div").height() * 0.05), right: ($("#overlay_div").width() * 0.1), bottom: ($("#overlay_div").height() * 0.45), left: ($("#overlay_div").width() * 0.1) },
-      width = ($("#overlay_div").width() * 1.0) - margin.left - margin.right,
+  var margin = { top: ($("#overlay_div").height() * 0.05), right: ($("#overlay_div").width() * 0.02), bottom: ($("#overlay_div").height() * 0.45), left: ($("#overlay_div").width() * 0.05) },
+      width = ( ($("#overlay_div").width() * 1.0) - margin.left - margin.right ) * 0.6 ,
       //height = ($("#overlay_div").height() * 1.0) - margin.top - margin.bottom,
       height = ($("#overlay_div").height() * 1),
       gridSizeX = Math.floor(width / 10.0),
@@ -56,7 +57,7 @@ function heatmap(){
       .attr("height", height + margin.top + margin.bottom)
       .attr("id", "heatmap")
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       
   var dayLabels = svg.selectAll(".dayLabel")
       .data(days)
@@ -117,7 +118,8 @@ function heatmap(){
     .text(function(d) { return "≥ " + Math.round(d); })
     .attr("x", function(d, i) { return legendElementWidth * i; })
     .attr("y", gridSizeY * 6.5);
-  
+
+  pieChart();
 }
 
 /* 
@@ -153,7 +155,7 @@ Notes:          None.
 */
 function parseCourseTimes(buildingName, selected_courses){
 
-  console.log(selected_courses);
+  //console.log(selected_courses);
 
   var numberOfStudentsInBuilding = []; 
   var times = ["8:05 AM", "9:30 AM", "10:30 AM", "12:00 PM", "1:30 PM", "3:00 PM", "4:30 PM", "6:00 PM", "7:30 PM", "9:00 PM"];
@@ -169,21 +171,27 @@ function parseCourseTimes(buildingName, selected_courses){
 
       totalEnrolled = 0;
 
+      // array used to collect all the courses happening during this period on this day.
+      var coursesDuringPeriod = [];
+
       selected_courses.forEach(function(element, index, array){
         if(element.BuildingName == buildingName){
           if (HappensOnDay(element.Weekdays, days[i])) {
             if (element.StartTime == times[j]){
+              coursesDuringPeriod.push(element);
               totalEnrolled += parseInt(element.Enrolled);
             }
           }
         }
       });
 
+      currentPeriod.courses = coursesDuringPeriod;
+
       currentPeriod.value = totalEnrolled;
 
-      if(totalEnrolled > 0){
+      /*if(totalEnrolled > 0){
         console.log(currentPeriod);
-      }
+      }*/
 
       numberOfStudentsInBuilding.push(currentPeriod);
     }
