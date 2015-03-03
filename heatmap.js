@@ -103,7 +103,7 @@ function heatmap(){
                           }
                         });
 
-  heatMap.append("title").text(function(d) { return d.value; });
+  heatMap.append("title").text(function(d) { return d.value + "\n" + PrintClassesAtTime(d.courses); });
       
   var legend = svg.selectAll(".legend")
       //.data([0].concat(colorScale.quantiles()), function(d) { return d; })
@@ -150,6 +150,21 @@ function calculateRanges(heatmap_data){
   }
 
   return ranges;
+}
+
+function PrintClassesAtTime(courses_at_time){
+
+  var return_string = "";
+
+  courses_at_time.forEach(function(element, index, array){
+    if (element.Enrolled > 0){
+      return_string += element.Department + ": " + element.Title + ", " + element.Enrolled + " students enrolled";
+      return_string += "\n";
+    }
+  });
+
+  return return_string;
+
 }
 
 /* 
