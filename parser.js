@@ -65,27 +65,35 @@ function split_buildings(courses, dept)
     var buildings = [];
     selected_courses = [];
 
+    if (selected_departments[0] == "All" || dept == "All"){
+        selected_departments = [];
+    }
+
     // Nuking the selected departments array for now. Will need to remove later.
-    selected_departments = [];
+    //selected_departments = [];
     if (dept != ""){
         selected_departments.push(dept);
     }
+
     // Aggregate all courses into buildings by adding Enrolled students.
-    courses.forEach(function(element, index, array)
+    selected_departments.forEach(function(dept_element, dept_index, dept_array)
         {
-            if (dept == "" || dept == element.Department){
+        courses.forEach(function(element, index, array)
+            {
+                if (dept_element == "All" || dept_element == element.Department){
 
-                selected_courses.push(element);
+                    selected_courses.push(element);
 
-                var index = contains_building(buildings, element.BuildingName);
-                Num = parseInt(element.Enrolled);
-                // -1 means that buildings isn't in the array yet.
-                if (index == -1){
-                    buildings.push({"Building": element.BuildingName, "Enrolled" : Num});
-                } else {
-                    buildings[index].Enrolled += Num;
+                    var index = contains_building(buildings, element.BuildingName);
+                    Num = parseInt(element.Enrolled);
+                    // -1 means that buildings isn't in the array yet.
+                    if (index == -1){
+                        buildings.push({"Building": element.BuildingName, "Enrolled" : Num});
+                    } else {
+                        buildings[index].Enrolled += Num;
+                    }
                 }
-            }
+            });
         });
 
     // Remove buildings with only 1 student in them. This can result from those 

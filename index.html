@@ -37,9 +37,11 @@
 				<!-- <label for="deptsearch">Add Departments: </label> -->
 				<input id="deptsearch">
 				<!-- This button updates the visualization by filtering the given department -->
-				<button id="deptButton"> Update </button>
+				<button id="deptButton"> Update </button> <br>
+				<button id="showAll"> Show All Departments </button> <br>
+				<!--<button id="deleteLastDept"> Delete Last Department </button>-->
 			</div>
-			<h3>Additional Filters +</h3>
+			<!--<h3>Additional Filters +</h3>-->
 		</div>
 
 		<!-- Visualization -->
@@ -64,7 +66,7 @@
 
 		// split buildings will take in an array of course objects and a string.
 		// The string is a filter for which department courses should be visualized.
-		split_buildings(courses, "");		
+		split_buildings(courses, "All");		
 
 	</script>
 	

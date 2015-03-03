@@ -80,6 +80,13 @@ $(function() {
         update_department_list();
     });
 
+    // Show all departments again
+    $("#showAll").button().click(function(event) {
+        split_buildings(courses, "All");  
+        $("#deptsearch").val("");
+        update_department_list();
+    });
+
     // Upon window resizing, I want the heatmap to be redrawn.
     $( window ).resize(function() {
         heatmap();
@@ -102,7 +109,13 @@ function update_department_list(){
     $("#department_list").empty();
 
     if (selected_departments.length > 0){
-        $("#department_list").append('<li>' + selected_departments[0] + '</li>');
+        if (selected_departments[0] == "All"){
+            $("#department_list").append('<li> Showing all departments </li>');
+        } else {
+            selected_departments.forEach(function(element, index, array){
+                $("#department_list").append('<li>' + element + '</li>');
+            });
+        }
     } else {
         $("#department_list").append('<li> Showing all departments </li>');
     }  

@@ -4,7 +4,7 @@ function pieChart(pieData){
 
 	var width = $("#overlay_div").height() * 0.6,
 		height = $("#overlay_div").height() * 0.6,
-		radius = $("#overlay_div").height() * 0.32;
+		radius = $("#overlay_div").height() * 0.26;
 
 	var color = d3.scale.ordinal()
 		.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
