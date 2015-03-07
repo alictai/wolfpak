@@ -130,14 +130,14 @@ function begin_viz()
       .attr("y1", 0)
       .attr("x2", 5)
       .attr("y2", 0)
-      .style("stroke", "#000");
+      .style("stroke", "#000");*/
 
-  ticks.append("text")
+  /*ticks.append("text")
       .attr("x", 8)
       .attr("dy", ".35em")
       .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180)translate(-16)" : null; })
       .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-      .text(function(d) { return d.label; });
+      .text(function(d) { return d.label; });*/
 
   svg.append("g")
       .attr("class", "chord")
@@ -147,7 +147,7 @@ function begin_viz()
       .attr("d", d3.svg.chord().radius(innerRadius))
       .style("fill", function(d) { return fill(d.target.index); })
       .style("opacity", 1);
-  */  
+  
 }
 
 // Returns an array of tick angles and labels, given a group.

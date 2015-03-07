@@ -88,9 +88,10 @@ function split_buildings(courses, dept)
                     Num = parseInt(element.Enrolled);
                     // -1 means that buildings isn't in the array yet.
                     if (index == -1){
-                        buildings.push({"Building": element.BuildingName, "Enrolled" : Num});
+                        buildings.push({"Building": element.BuildingName, "Enrolled" : Num, "Courses": [element]});
                     } else {
                         buildings[index].Enrolled += Num;
+                        buildings[index].Courses.push(element);
                     }
                 }
             });
@@ -151,11 +152,25 @@ function create_matrix(buildings){
 
     buildings.forEach(function(element, index, array)
         {
+            //console.log(element.Courses);
+
             row_array = [];
+
+            for(i = 0; i < building_length; i++){
+                row_array.push(0);
+            }
+
+            element.Courses.forEach(function(course_element, course_index, course_array){
+                processOneCourse(row_array, course_element, index, array);
+            });
+
+            //console.log(row_array);
+
+            /*row_array = [];
             row_array.push(parseInt(element.Enrolled));
             for(i = 1; i < building_length; i++){
                 row_array.push(0);
-            }
+            }*/
 
             compounded = {"Matrix" : row_array, "Name" : element.Building, "Enrolled" : element.Enrolled};
 
@@ -163,4 +178,53 @@ function create_matrix(buildings){
         });
 
     return building_matrix;
+}
+
+function processOneCourse(cur_matrix, cur_course, cur_index, building_array){
+    next_start = findNextStartTime(cur_course.EndTime);
+    total = parseInt(cur_course.Enrolled);
+    if (next_start == "not_found"){
+        cur_matrix[cur_index] += parseInt(total);
+    } else {
+        var cur_tally = 0;
+        var index_ratio_pair = [];
+        //console.log(building_array);    
+        building_array.forEach(function(b_elem, b_index, b_array){
+            b_elem.Courses.forEach(function(c_elem, c_index, c_array){
+                if (c_elem.StartTime == next_start){
+                    cur_tally += parseInt(c_elem.Enrolled);
+                    index_ratio_pair.push({Index: b_index, Enrolled: parseInt(c_elem.Enrolled)});
+                }
+            });    
+        });
+
+        if (cur_tally == 0){
+            cur_matrix[cur_index] += parseInt(total);
+        } else {
+            index_ratio_pair.forEach(function(i_elem, i_index, i_array){
+                cur_matrix[i_elem.Index] += ((i_elem.Enrolled / cur_tally) * total);
+            });
+        }
+    }
+}
+
+function findNextStartTime(end_time_string){
+
+    if (end_time_string == "10:15 AM"){
+        return "10:30 AM";
+    } else if (end_time_string == "11:45 AM"){
+        return "12:00 PM";
+    } else if (end_time_string == "1:15 PM"){
+        return "1:30 PM";
+    } else if (end_time_string == "2:45 PM"){
+        return "3:00 PM";
+    } else if (end_time_string == "4:15 PM"){
+        return "4:30 PM";
+    } else if (end_time_string == "5:45 PM"){
+        return "6:00 PM";
+    } else if (end_time_string == "7:15 PM"){
+        return "7:30 PM";
+    } else {
+        return "not_found";
+    }
 }
