@@ -28,10 +28,16 @@ function begin_viz()
     .matrix(matrix);
 
   // Define some size variables.
-  var width = 960,
+  /*var width = 960,
       height = 500,
       innerRadius = Math.min(width, height) * .41,
-      outerRadius = innerRadius * 1.1;
+      outerRadius = innerRadius * 1.1;*/
+
+  var width = $(window).width() * 0.7; 
+  var height = $(window).height();
+  var innerRadius = Math.min(width, height) * .45;
+  var outerRadius = innerRadius * 1.1;
+
 
   // fill object for the colors. Will need to make it procedural (right now it assumes 4 buildings only..)
   var fill = d3.scale.ordinal()
@@ -45,7 +51,7 @@ function begin_viz()
       .attr("height", height)
       .style("position", "absolute")
       .append("g")
-        .attr("transform", "translate(" + width / 3 + "," + height / 2 + ")");
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
   // tooltip that will pop up on mouse hovering. Need 2 to make 2 separate line tooltip... Kinda stupid.
   var tooltip1 = d3.select("body")
