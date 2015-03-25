@@ -21,11 +21,21 @@ function pieChart(pieData){
 		.attr("width", width)
 		.attr("height", height)
 		.attr("id", "piechart")
-		.style("position", "absolute")
-		.append("g")
+		.style("position", "absolute");
+
+	var text = svg.append("text")
+			   .attr("x", width / 2)
+               .attr("y", 25)
+               .attr("text-anchor", "middle")
+               .text( "Departmental Distribution")
+               .attr("font-family", "sans-serif")
+               .attr("font-size", "20px")
+               .attr("fill", "black");
+
+	var g1 = svg.append("g")
 			.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-	var g = svg.selectAll(".arc")
+	var g = g1.selectAll(".arc")
 		.data(pie(pieData))
 		.enter().append("g")
 	    	.attr("class", "arc");
