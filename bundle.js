@@ -21,6 +21,26 @@ function begin_viz()
       matrix.push(element.Matrix);
     });
 
+  var max_arc = 0;
+  var max_transition = 0;
+
+  matrix.forEach(function(row, index, array){
+    cur_max_arc = 0;
+    row.forEach(function(element, index2, array2){
+      cur_max_arc += parseInt(element);
+      
+      if (parseInt(element) > max_transition){
+        max_transition = parseInt(element);
+      }
+    })
+    if (cur_max_arc > max_arc){
+      max_arc = cur_max_arc;
+    }
+  });
+
+  /*console.log(max_arc);
+  console.log(max_transition);*/
+
   // create the chord object required for the bundle viz.
   var chord = d3.layout.chord()
     .padding(.05)
@@ -35,7 +55,7 @@ function begin_viz()
 
   var width = $(window).width() * 0.7; 
   var height = $(window).height();
-  var innerRadius = Math.min(width, height) * .45;
+  var innerRadius = Math.min(width, height) * .40;
   var outerRadius = innerRadius * 1.1;
 
 
@@ -51,7 +71,8 @@ function begin_viz()
       .attr("height", height)
       .style("position", "absolute")
       .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        //.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        .attr("transform", "translate(" + outerRadius + "," + height / 2 + ")");
 
   // tooltip that will pop up on mouse hovering. Need 2 to make 2 separate line tooltip... Kinda stupid.
   var tooltip1 = d3.select("body")
@@ -79,8 +100,10 @@ function begin_viz()
       // as a big foreach
     .enter().append("path")
       // d here refers to the current data object from the bound data array.
-      .style("fill", function(d) { return fill(d.index); })
-      .style("stroke", function(d) { return fill(d.index); })
+      /*.style("fill", function(d) { return fill(d.index); })
+      .style("stroke", function(d) { return fill(d.index); })*/
+      .style("fill", function(d) { return fill( (compounded_buildings[d.index].Enrolled / max_arc) * 4); })
+      .style("stroke", function(d) { return fill( (compounded_buildings[d.index].Enrolled / max_arc) * 4); })
       .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
       .on("mouseover", function(d)
           {
@@ -151,8 +174,33 @@ function begin_viz()
       .data(chord.chords)
     .enter().append("path")
       .attr("d", d3.svg.chord().radius(innerRadius))
+      //.attr("stroke-width", 0)
       .style("fill", function(d) { return fill(d.target.index); })
-      .style("opacity", 1);
+      .style("stroke", function(d) { return fill(d.target.index); })
+      .style("opacity", 1)
+      /*.on("mouseover", function(d)
+          {
+            // We use the index of d to display the correct building name and enrolled student number.
+            //console.log(d.target.index);
+            tooltip1.text("Test"); 
+            tooltip2.text("Test"); 
+            tooltip2.style("visibility", "visible");
+            return tooltip1.style("visibility", "visible");
+          })
+      .on("mousemove", function()
+          {
+            // Make the toolbox follow the mouse.
+            // d3.event.pageY/pageX are the y and x coordinates of the mouse.
+            tooltip2.style("top", (d3.event.pageY + 10)+"px").style("left",(d3.event.pageX+10)+"px");
+            return tooltip1.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+          })
+      .on("mouseout", function()
+          {
+            // erase the tooltips when mouse moves out of the arc.
+            tooltip2.style("visibility", "hidden");
+            return tooltip1.style("visibility", "hidden");
+          })*/;
+      
   
 }
 

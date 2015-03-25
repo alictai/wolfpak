@@ -103,7 +103,7 @@ function heatmap(){
                           }
                         });
 
-  heatMap.append("title").text(function(d) { return d.value + "\n" + PrintClassesAtTime(d.courses); });
+  heatMap.append("title").text(function(d) { return d.value + " Students enrolled in the following classes:\n" + PrintClassesAtTime(d.courses); });
       
   var legend = svg.selectAll(".legend")
       //.data([0].concat(colorScale.quantiles()), function(d) { return d; })
