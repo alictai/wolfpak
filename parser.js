@@ -65,14 +65,14 @@ function split_buildings(courses, dept)
     var buildings = [];
     selected_courses = [];
 
-    if (selected_departments[0] == "All" || dept == "All"){
-        selected_departments = [];
-    }
+    if (dept != "Resize"){
 
-    // Nuking the selected departments array for now. Will need to remove later.
-    //selected_departments = [];
-    if (dept != ""){
-        selected_departments.push(dept);
+        if (selected_departments[0] == "All" || dept == "All"){
+            selected_departments = [];
+        }
+        if (dept != ""){
+            selected_departments.push(dept);
+        }
     }
 
     // Aggregate all courses into buildings by adding Enrolled students.

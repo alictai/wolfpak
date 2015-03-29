@@ -38,9 +38,6 @@ function begin_viz()
     }
   });
 
-  /*console.log(max_arc);
-  console.log(max_transition);*/
-
   // create the chord object required for the bundle viz.
   var chord = d3.layout.chord()
     .padding(.05)
@@ -61,8 +58,9 @@ function begin_viz()
 
   // fill object for the colors. Will need to make it procedural (right now it assumes 4 buildings only..)
   var fill = d3.scale.ordinal()
-      .domain(d3.range(4))
-      .range(["#5E412F", "#FCEBB6", "#78C0A8", "#F26223"]);
+      .domain(d3.range(8))
+      .range(["#B0A03D", "#B08A3D", "#B0753D", "#B03F3D", "#94335F", "#722772", "#4E3077", "#3C357A"])
+      //.range(["#5E412F", "#FCEBB6", "#78C0A8", "#F26223"]);
       //.range(["#EC95ED", "#95D2ED", "#EDE895", "#A8ED95"]);
 
   // Append the svg object to contain the visualization
@@ -72,7 +70,7 @@ function begin_viz()
       .style("position", "absolute")
       .append("g")
         //.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-        .attr("transform", "translate(" + outerRadius + "," + height / 2 + ")");
+        .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
 
   // tooltip that will pop up on mouse hovering. Need 2 to make 2 separate line tooltip... Kinda stupid.
   var tooltip1 = d3.select("body")
@@ -100,10 +98,22 @@ function begin_viz()
       // as a big foreach
     .enter().append("path")
       // d here refers to the current data object from the bound data array.
-      /*.style("fill", function(d) { return fill(d.index); })
-      .style("stroke", function(d) { return fill(d.index); })*/
-      .style("fill", function(d) { return fill( (compounded_buildings[d.index].Enrolled / max_arc) * 4); })
-      .style("stroke", function(d) { return fill( (compounded_buildings[d.index].Enrolled / max_arc) * 4); })
+      .style("fill", function(d) { 
+             var col_index;
+             if (compounded_buildings[d.index].Enrolled > max_arc){
+                col_index = 7;  
+             } else {
+                col_index = (compounded_buildings[d.index].Enrolled / max_arc) * 8;
+             }
+             return fill(  Math.round(col_index) ); })
+      .style("stroke", function(d) { 
+             var col_index;
+             if (compounded_buildings[d.index].Enrolled > max_arc){
+                col_index = 7;  
+             } else {
+                col_index = (compounded_buildings[d.index].Enrolled / max_arc) * 8;
+             }
+             return fill(  Math.round(col_index) ); })
       .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))
       .on("mouseover", function(d)
           {
@@ -175,8 +185,22 @@ function begin_viz()
     .enter().append("path")
       .attr("d", d3.svg.chord().radius(innerRadius))
       //.attr("stroke-width", 0)
-      .style("fill", function(d) { return fill(d.target.index); })
-      .style("stroke", function(d) { return fill(d.target.index); })
+      .style("fill", function(d) { 
+             var col_index;
+             if (d.source.value > max_transition){
+                col_index = 7;  
+             } else {
+                col_index = (d.source.value / max_transition) * 8;
+             }
+             return fill(  Math.round(col_index) ); })
+      .style("stroke", function(d) { 
+             var col_index;
+             if (d.source.value > max_transition){
+                col_index = 7;  
+             } else {
+                col_index = (d.source.value / max_transition) * 8;
+             }
+             return fill(  Math.round(col_index) ); })
       .style("opacity", 1)
       /*.on("mouseover", function(d)
           {

@@ -118,6 +118,7 @@ $(function() {
 
     // Upon window resizing, I want the heatmap to be redrawn.
     $( window ).resize(function() {
+        split_buildings(courses, "Resize");  
         heatmap();
     });
 
