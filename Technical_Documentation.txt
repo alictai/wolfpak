@@ -1,0 +1,57 @@
+Technical Documentation for Classroom Visualization project
+by Hyung-seo Park (E'15) and Alison Tai (E'15)
+
+Background:
+Our senior capstone project's goal was to visualize the
+flow of students from one building to another in order to
+correlate it with departmental growth.
+
+Technical:
+- 	For the visualization we use D3. D3 is essentially a javascript
+  	library that offers some powerful tools for creating beautiful
+  	graphics. 
+  	However, it is a little tricky to use. Much of it involves tacking on
+  	additional D3 elements (path, chords etc.) on the html and modifying its
+  	style and attributes. 
+  	A lot of what we did (and presumably what you would do) involved taking
+  	existing D3 visualization code (available readily online... there is
+  	literally almost everything you could imagine) and tailoring them
+  	to our needs and wants.
+  	To extend our project I would just advise that you first learn the basics of
+  	D3, understand (just generally) how our project's D3 code works and then
+  	moving on.
+-	To host we used Microsoft Azure. This also allowed us to use an online database 
+	to store our data.
+	We used Microsoft Azure because we are both going to be MS employees next year 
+	and we had access to a free Azure server that could host our project.
+	Though what I would advise is developing locally first. 
+	NOTE: developing locally can be tricky if you are trying to read from
+	a CSV since you can't access local files from a browser. Neither can you
+	just host on a github page because it then runs into some cross domain referencing
+	issues... 
+	The best solution we found was to use a super hacky function (see CourseLocationCSV.js) 
+	that essentially turns the entire csv...into a string. You can look at the code
+	but trust me it's some mad voodoo magic going on there...
+-	For the UI we used a bit of jquery which is just a js library that makes js a bit
+	more bearable.
+
+Project files:
+- 	index.html: this is the only web page that we have. Open this in your browser to see our project.
+- 	bundle.js: D3 code that controls the bundle visualization (the segmented circle with arcs in-between)
+-	heatmap.js: D3 code that controls the heatmap that pops up when use clicks on a circle segment
+-	piechat.js: D3 code that controls the piechart that pops up next to the heatmap
+- 	parser.js: js code used to parse and process data to be readied for the visualization
+-	ui.js: js code that controls some UI interactions (buttons, resize etc.)
+
+Project set-up:
+There isn't anything that really needs to be installed ahead of time.
+Just fork our project at https://github.com/alictai/wolfpak.
+There might be some changes you might need to make in parser.js in the function parse_courses if you are
+opening the page locally and not on a server with a database.
+
+The Data:
+One of the biggest challenges we faced during our project was obtaining the necessary data. 
+Right now, we are using a csv file that contains course information.
+Ideally, what we really needed were student schedule data which would have been so much
+more accurate in regards to the path students take everyday... 
+
