@@ -187,7 +187,7 @@ function begin_viz()
       //.attr("stroke-width", 0)
       .style("fill", function(d) { 
              var col_index;
-             if (d.source.value > max_transition){
+             if (d.source.value >= max_transition){
                 col_index = 7;  
              } else {
                 col_index = (d.source.value / max_transition) * 8;
@@ -195,35 +195,82 @@ function begin_viz()
              return fill(  Math.round(col_index) ); })
       .style("stroke", function(d) { 
              var col_index;
-             if (d.source.value > max_transition){
+             if (d.source.value >= max_transition){
                 col_index = 7;  
              } else {
                 col_index = (d.source.value / max_transition) * 8;
              }
              return fill(  Math.round(col_index) ); })
       .style("opacity", 1)
-      /*.on("mouseover", function(d)
+      //.on("mouseover", fade(.1))
+      //.on("mouseout", fade(1));
+      .on("mouseover", function(g, i)
           {
+            /*if (d.source.index != i){
+              console.log(g);
+            }*/
+
+            /*svg.selectAll(".chord path")
+              .filter(function(d) { return d.source.index != g.source.index || d.target.index != g.target.index; })
+              .transition()
+              .style("opacity", 0.3);
+*/
+            svg.selectAll(".chord path")
+              .filter(function(d) { return d.source.index == g.source.index && d.target.index == g.target.index; })
+              .transition()
+              .style("fill", "#FF0000")
+              .style("stroke", "#FF0000");
+
+            
+            //console.log(d.source.value);
             // We use the index of d to display the correct building name and enrolled student number.
             //console.log(d.target.index);
-            tooltip1.text("Test"); 
+            /*tooltip1.text("Test"); 
             tooltip2.text("Test"); 
             tooltip2.style("visibility", "visible");
-            return tooltip1.style("visibility", "visible");
+            return tooltip1.style("visibility", "visible");*/
           })
-      .on("mousemove", function()
+      .on("mousemove", function(g, i)
           {
-            // Make the toolbox follow the mouse.
-            // d3.event.pageY/pageX are the y and x coordinates of the mouse.
-            tooltip2.style("top", (d3.event.pageY + 10)+"px").style("left",(d3.event.pageX+10)+"px");
-            return tooltip1.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+
+            /*svg.selectAll(".chord path")
+              .filter(function(d) { return d.source.index != g.source.index || d.target.index != g.target.index; })
+              .transition()
+              .style("opacity", 1);*/
           })
-      .on("mouseout", function()
+      .on("mouseout", function(g, i)
           {
+            /*svg.selectAll(".chord path")
+              .filter(function(d) { return d.source.index == g.source.index || d.target.index == g.target.index; })
+              .transition()
+              .style("opacity", 1);
+*/
+            svg.selectAll(".chord path")
+              .filter(function(d) { return d.source.index == g.source.index && d.target.index == g.target.index; })
+              .transition()
+              .style("fill", function(d) { 
+                 var col_index;
+                 if (d.source.value >= max_transition){
+                    col_index = 7;  
+                 } else {
+                    col_index = (d.source.value / max_transition) * 8;
+                 }
+                 return fill(  Math.round(col_index) ); 
+              })
+              .style("stroke", function(d) { 
+                 var col_index;
+                 if (d.source.value >= max_transition){
+                    col_index = 7;  
+                 } else {
+                    col_index = (d.source.value / max_transition) * 8;
+                 }
+                 return fill(  Math.round(col_index) ); 
+              });
+
             // erase the tooltips when mouse moves out of the arc.
-            tooltip2.style("visibility", "hidden");
-            return tooltip1.style("visibility", "hidden");
-          })*/;
+            /*tooltip2.style("visibility", "hidden");
+            return tooltip1.style("visibility", "hidden");*/
+          });
       
   
 }
@@ -243,9 +290,12 @@ function groupTicks(d) {
 // Returns an event handler for fading a given chord group.
 function fade(opacity) {
   return function(g, i) {
+
+    console.log("Test");
+
     svg.selectAll(".chord path")
         .filter(function(d) { return d.source.index != i && d.target.index != i; })
       .transition()
-        .style("opacity", opacity);
+        .style("fill", "#FF0000");
   };
 }

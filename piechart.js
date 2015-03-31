@@ -2,9 +2,21 @@ function pieChart(pieData){
 
 	$("#piechart").remove();
 
+	var maxVal = 0;
+
+	pieData.forEach(function(value, index, array){
+		if (parseInt( value.Enrolled) > maxVal){
+			maxVal = parseInt(value.Enrolled);
+		}
+	});
+
 	var width = $("#overlay_div").height() * 0.6,
 		height = $("#overlay_div").height() * 0.6,
 		radius = $("#overlay_div").height() * 0.26;
+
+	var fill = d3.scale.ordinal()
+      .domain(d3.range(8))
+      .range(["#B0A03D", "#B08A3D", "#B0753D", "#B03F3D", "#94335F", "#722772", "#4E3077", "#3C357A"]);
 
 	var color = d3.scale.ordinal()
 		.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
@@ -46,7 +58,17 @@ function pieChart(pieData){
 
 	g.append("path")
 	  	.attr("d", arc)
-	  	.style("fill", function(d) { return color(d.data.Department); });
+	  	.style("fill", function(d) { 
+	  		console.log(maxVal);
+
+             var col_index;
+             if (parseInt(d.data.Enrolled) >= maxVal){
+                col_index = 7;  
+             } else {
+                col_index = (parseInt(d.data.Enrolled) / maxVal) * 8;
+             }
+             return fill(  Math.round(col_index) ); 
+        });
 
 	/*g.append("text")
 	  	.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
