@@ -68,7 +68,8 @@ function pieChart(pieData){
                 col_index = (parseInt(d.data.Enrolled) / maxVal) * 8;
              }
              return fill(  Math.round(col_index) ); 
-        });
+        })
+        .style("stroke", "#FFFFFF");
 
 	/*g.append("text")
 	  	.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
