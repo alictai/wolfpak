@@ -19,19 +19,21 @@ Technical:
   	to our needs and wants.
   	To extend our project I would just advise that you first learn the basics of
   	D3, understand (just generally) how our project's D3 code works and then
-  	moving on.
--	To host we used Microsoft Azure. This also allowed us to use an online database 
+  	move on to add your own visualizations.
+-	To host our project, we used Microsoft Azure. This also allowed us to use an online database 
 	to store our data.
 	We used Microsoft Azure because we are both going to be MS employees next year 
 	and we had access to a free Azure server that could host our project.
-	Though what I would advise is developing locally first. 
+	Though before considering hosting the project, I would advise to test things locally first.
+	You don't have to use Azure to host the website, anything else would do. Ideally choose an option
+	that gives you a database. 
 	NOTE: developing locally can be tricky if you are trying to read from
 	a CSV since you can't access local files from a browser. Neither can you
 	just host on a github page because it then runs into some cross domain referencing
 	issues... 
 	The best solution we found was to use a super hacky function (see CourseLocationCSV.js) 
 	that essentially turns the entire csv...into a string. You can look at the code
-	but trust me it's some mad voodoo magic going on there...
+	but trust me it's some mad voodoo magic going on there... But it works.
 -	For the UI we used a bit of jquery which is just a js library that makes js a bit
 	more bearable.
 
@@ -53,5 +55,5 @@ The Data:
 One of the biggest challenges we faced during our project was obtaining the necessary data. 
 Right now, we are using a csv file that contains course information.
 Ideally, what we really needed were student schedule data which would have been so much
-more accurate in regards to the path students take everyday... 
+more accurate in regards to the path students take everyday.
 
