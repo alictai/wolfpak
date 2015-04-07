@@ -72,7 +72,7 @@ function pieChart(pieData){
         .style("stroke", "#FFFFFF");
 
     var text = svg.append("text")
-			   .attr("x", width / 3)
+			   .attr("x", width / 2)
                .attr("y", height )
                .attr("text-anchor", "middle")
                .text( "Hover over the graphs for more details.")
