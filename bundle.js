@@ -221,6 +221,19 @@ function begin_viz()
               .style("fill", "#FF0000")
               .style("stroke", "#FF0000");
 
+            if (g.source.index != g.target.index){
+
+              tooltip1.text( parseInt(g.source.value) + " students from " + compounded_buildings[g.source.index].Name); 
+              tooltip2.text(parseInt(g.target.value) + " students from " + compounded_buildings[g.target.index].Name); 
+              tooltip2.style("visibility", "visible");
+              tooltip1.style("visibility", "visible");
+            } else {
+              tooltip1.text( parseInt(g.source.value) + " students staying in " + compounded_buildings[g.source.index].Name); 
+              //tooltip2.text(parseInt(g.target.value) + " from " + compounded_buildings[g.target.index].Name); 
+              //tooltip2.style("visibility", "visible");
+              tooltip1.style("visibility", "visible");
+            }
+
             
             //console.log(d.source.value);
             // We use the index of d to display the correct building name and enrolled student number.
@@ -230,13 +243,12 @@ function begin_viz()
             tooltip2.style("visibility", "visible");
             return tooltip1.style("visibility", "visible");*/
           })
-      .on("mousemove", function(g, i)
+      .on("mousemove", function()
           {
-
-            /*svg.selectAll(".chord path")
-              .filter(function(d) { return d.source.index != g.source.index || d.target.index != g.target.index; })
-              .transition()
-              .style("opacity", 1);*/
+            // Make the toolbox follow the mouse.
+            // d3.event.pageY/pageX are the y and x coordinates of the mouse.
+            tooltip2.style("top", (d3.event.pageY + 10)+"px").style("left",(d3.event.pageX+10)+"px");
+            return tooltip1.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
           })
       .on("mouseout", function(g, i)
           {
@@ -266,6 +278,9 @@ function begin_viz()
                  }
                  return fill(  Math.round(col_index) ); 
               });
+
+              tooltip2.style("visibility", "hidden");
+              tooltip1.style("visibility", "hidden");
 
             // erase the tooltips when mouse moves out of the arc.
             /*tooltip2.style("visibility", "hidden");
