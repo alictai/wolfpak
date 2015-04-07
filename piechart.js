@@ -31,7 +31,7 @@ function pieChart(pieData){
 
 	var svg = d3.select("#overlay_div").append("svg")
 		.attr("width", width)
-		.attr("height", height)
+		.attr("height", height * 1.5)
 		.attr("id", "piechart")
 		.style("position", "absolute");
 
@@ -70,6 +70,15 @@ function pieChart(pieData){
              return fill(  Math.round(col_index) ); 
         })
         .style("stroke", "#FFFFFF");
+
+    var text = svg.append("text")
+			   .attr("x", width / 3)
+               .attr("y", height )
+               .attr("text-anchor", "middle")
+               .text( "Hover over the graphs for more details.")
+               .attr("font-family", "sans-serif")
+               .attr("font-size", "18px")
+               .attr("fill", "black");
 
 	/*g.append("text")
 	  	.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })

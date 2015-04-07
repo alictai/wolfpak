@@ -140,7 +140,7 @@ function update_department_list(){
 
     if (selected_departments.length > 0){
         if (selected_departments[0] == "All"){
-            $("#department_list").append('<li> Showing all subjects </li>');
+            $("#department_list").append('<li> Showing all departments </li>');
         } else {
             selected_departments.forEach(function(element, index, array){
                 $("#department_list").append('<li>' + element + '</li>');
