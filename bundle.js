@@ -221,14 +221,16 @@ function begin_viz()
               .style("fill", "#FF0000")
               .style("stroke", "#FF0000");
 
-            if (g.source.index != g.target.index){
+            var sourceVal = parseInt(g.source.value) < 1? 1 : parseInt(g.source.value);
+            var targetVal = parseInt(g.target.value) < 1? 1 : parseInt(g.target.value);
 
-              tooltip1.text( parseInt(g.source.value) + " students from " + compounded_buildings[g.source.index].Name); 
-              tooltip2.text(parseInt(g.target.value) + " students from " + compounded_buildings[g.target.index].Name); 
+            if (g.source.index != g.target.index){
+              tooltip1.text( sourceVal + " students from " + compounded_buildings[g.source.index].Name); 
+              tooltip2.text( targetVal + " students from " + compounded_buildings[g.target.index].Name); 
               tooltip2.style("visibility", "visible");
               tooltip1.style("visibility", "visible");
             } else {
-              tooltip1.text( parseInt(g.source.value) + " students staying in " + compounded_buildings[g.source.index].Name); 
+              tooltip1.text( sourceVal + " students staying in " + compounded_buildings[g.source.index].Name); 
               //tooltip2.text(parseInt(g.target.value) + " from " + compounded_buildings[g.target.index].Name); 
               //tooltip2.style("visibility", "visible");
               tooltip1.style("visibility", "visible");
