@@ -5,10 +5,8 @@
 
 var overlay_showing = false;
 
-$(function() {
-
-    // Array of all department as strings.
-    var departments = [
+// Array of all department as strings.
+departments = [
         "Africa in the New World",
         "Africana Studies",
         "All College",
@@ -95,7 +93,9 @@ $(function() {
         "Women's, Gender, and Sexuality",
         "World Civilization",
         "World Literature"
-    ];
+];
+
+$(function() {
 
     // Autocompletes the textbox with suggested departments.
     $( "#deptsearch" ).autocomplete({
@@ -104,9 +104,12 @@ $(function() {
 
     // Updates the visualization with selected department.
     $("#deptButton").button().click(function(event) {
-        split_buildings(courses, $("#deptsearch").val());  
-        $("#deptsearch").val("");
-        update_department_list();
+    	var input = $("#deptsearch").val();
+    	if (in_depts(input, departments)) {
+		    split_buildings(courses, input);  
+    	    $("#deptsearch").val("");
+        	update_department_list();
+        }
     });
 
     // Show all departments again
@@ -149,4 +152,13 @@ function update_department_list(){
     } else {
         $("#department_list").append('<li> Showing all departments </li>');
     }  
+}
+
+function in_depts(name, departments) {
+	for (i=0; i < departments.length; i++) {
+		if (departments[i] == name) {
+			return true;
+		}
+	}
+	return false;
 }
