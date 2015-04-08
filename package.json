@@ -1,0 +1,6 @@
+{
+  "name": "alictai",
+  "dependencies": {
+    "documentdb": "^1.0.0"
+  }
+}
