@@ -9,8 +9,13 @@
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="http://code.jquery.com/jquery-git2.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="scripts/ui.js"></script>
+
+	<!-- Data -->
+	<script type="text/php" src="scripts/db_hookup.php"></script>
 	<script type="text/javascript" src="scripts/CourseLocationCSV.js"></script>
+
+	<!-- Visualizations -->
+	<script type="text/javascript" src="scripts/ui.js"></script>
 	<script type="text/javascript" src="scripts/parser.js"></script>
 	<script type="text/javascript" src="scripts/bundle.js"></script>	
 	<script type="text/javascript" src="scripts/heatmap.js"></script>	
@@ -28,36 +33,12 @@
 		<!-- Header and Filters -->
 		<div class="filters">
 			<h1><span style="color:#78C0A8">flow</span><span style="color:#F26223">kap</span></h1>
+			</br>
+			<a href="index.html"> return to visualization </a>
 			<h4> By Hyung-seo Park and Alison Tai </h4>
-			<h3><b>Instructions</b></h3>
 			<p>
-				Each segmented arc represents an academic </br>
-				building at Tufts. Each connecting inner arc </br>represents the estimated flow of students from </br>
-				one building to another.</br>
-				</br>
-				Use the textbox below to filter the visualization</br>
-				by departments.
+				<b> Department Growth </b> </br>
 			</p>
-			<h3><b>Departments</b></h3>
-			<ul id = "department_list">
-				<!--<li> Append the department filters hurr </li> -->
-			</ul>
-			<h3><b>Add Departments</b></h3>
-			<div class="ui-widget">
-				<!-- <label for="deptsearch">Add Departments: </label> -->
-				<input id="deptsearch">
-				
-				<!--<button id="deleteLastDept"> Delete Last Department </button>-->
-			</div>
-			<!-- This button updates the visualization by filtering the given department -->
-				<button id="deptButton" class="button-example button-example-1 button-example-blue">Update</button> <br>
-				<button id="showAll" class="button-example button-example-1 button-example-green">Show All Departments</button> <br>
-			<h3><b>Additional Filters</b></h3>
-				<button id="AllBuildings" class="button-example button-example-1 button-example-blue">All Buildings</button> <br>
-		</div>
-
-		<!-- Visualization -->
-		<div class="viz" style="position: fixed; left:420px; top: 25px">
 		</div>
 
 		<!-- Footer -->
