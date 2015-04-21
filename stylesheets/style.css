@@ -84,7 +84,7 @@ button {
 }
 
 /* Button Styling from http://www.graemeboy.com/modern-css-buttons# */
-/*.button-example-1 {
+.button-example-1 {
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         -ms-border-radius: 3px;
@@ -126,24 +126,26 @@ button {
     box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03)
 }
 
+.button-example-green {
+    background: #ca7e7c;
+}
+
+.button-example-green:hover {
+    background: #Fa7e7c;
+}
+
 .button-example-blue {
-    background: #0971B2;
+    background: #7c77a5;
 }
 
 .button-example-blue:hover {
-    background: #0B88D6;
+    background: #2c77a5;
 }
 
-    .button-example-green {
-        background: #00B233;
-    }
-    .button-example-green:hover {
-        background: #00BD36;
+.button-example-pink {
+    background: #cab07c;
+}
 
-    .button-example-pink {
-        background: #FF0090;
-    }
-
-     .button-example-pink:hover {
-        background: #FF2F90;
-    }*/
+.button-example-pink:hover {
+    background: #FFC4CC;
+}
