@@ -181,6 +181,8 @@ function parseDepartments(buildingName, courses){
   for(var i = 0; i < courses.length; i++){
     if (courses[i].BuildingName == buildingName){
       coursesInBuilding.push(courses[i]);
+    } else if (buildingName == "All Buildings"){
+      coursesInBuilding.push(courses[i]);
     }
   }
 
@@ -243,11 +245,20 @@ function parseCourseTimes(buildingName, selected_courses){
       var coursesDuringPeriod = [];
 
       selected_courses.forEach(function(element, index, array){
-        if(element.BuildingName == buildingName){
+        if (buildingName == "All Buildings"){
           if (HappensOnDay(element.Weekdays, days[i])) {
             if (element.StartTime == times[j]){
               coursesDuringPeriod.push(element);
               totalEnrolled += parseInt(element.Enrolled);
+            }
+          }
+        }else {
+          if(element.BuildingName == buildingName){
+            if (HappensOnDay(element.Weekdays, days[i])) {
+              if (element.StartTime == times[j]){
+                coursesDuringPeriod.push(element);
+                totalEnrolled += parseInt(element.Enrolled);
+              }
             }
           }
         }

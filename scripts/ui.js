@@ -112,6 +112,18 @@ $(function() {
         }
     });
 
+    $("#AllBuildings").button().click(function(event) {
+        // Make the window visible.
+            $("#overlay_div").css("visibility", "visible");
+            // Draw the actual heatmap
+
+            buildingName = "All Buildings";
+
+            heatmap();
+            // Make heatmap div appear
+            setTimeout(function(){overlay_showing = true}, 500);
+    });
+
     // Show all departments again
     $("#showAll").button().click(function(event) {
         split_buildings(courses, "All");  
