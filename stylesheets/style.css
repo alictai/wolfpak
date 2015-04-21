@@ -26,6 +26,10 @@ button {
 	font-weight: 300;
 	font-size: 14px;
 	padding: 0px;
+	border: 0px;
+	margin: -3;
+	position: absolute;
+	top: 0;
 }
 
 .chord path {
@@ -148,4 +152,9 @@ button {
 
 .button-example-pink:hover {
     background: #FFC4CC;
+}
+
+#next_dept {
+	color: #7c77a5;
+	font-style:italic;
 }

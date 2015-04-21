@@ -155,11 +155,12 @@ function update_department_list(){
 
     if (selected_departments.length > 0){
         if (selected_departments[0] == "All"){
-            $("#department_list").append('<li> Showing all departments </li>');
+            $("#department_list").append('<li id="next_dept"> Showing all departments </li>');
         } else {
             selected_departments.forEach(function(element, index, array){
                 $("#department_list").append('<li>' + element + '</li>');
             });
+            $("#department_list").append('<li id="next_dept">' + "Add more departments below" + '</li>');
         }
     } else {
         $("#department_list").append('<li> Showing all departments </li>');
